@@ -9,7 +9,7 @@
         <!-- 操作栏；最小化、关闭 -->
         <Pane id="operation" prefWidth="540" prefHeight="158">
             <children>
-                <Label id="login_logo" styleClass="logo" layoutX="10" layoutY="5" prefWidth="200" prefHeight="15" text="憨憨 · 语约" style="-fx-text-fill:#666666;"/>
+                <Label id="login_logo" styleClass="logo" layoutX="10" layoutY="5" prefWidth="200" prefHeight="15" text="413 · 树洞" style="-fx-text-fill:#666666;"/>
                 <Button id="login_min" styleClass="min" layoutX="454" prefWidth="43" prefHeight="32"/>
                 <Button id="login_close" styleClass="close" layoutX="497" prefWidth="43" prefHeight="32"/>
             </children>
@@ -33,7 +33,7 @@
         <Button id="login_button" styleClass="login_button" layoutX="200" layoutY="345" prefWidth="250" prefHeight="45" text="登 陆"/>
 
         <Label id="slogan" layoutX="5" layoutY="398" prefWidth="400" prefHeight="15"
-               text="v1.0 小傅哥 | https://bugstack.cn">
+               text="v1.0 brain | https://zk1023.com">
             <font>
                 <Font size="12"/>
             </font>

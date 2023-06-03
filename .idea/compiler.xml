@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="itstack-naive-chat-ui-02" />
+        <module name="itstack-navie-chat-ui-04" />
       </profile>
     </annotationProcessing>
   </component>

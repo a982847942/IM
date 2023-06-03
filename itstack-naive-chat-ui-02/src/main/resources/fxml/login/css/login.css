@@ -1,7 +1,7 @@
 #login{
     -fx-background-radius: 4px;
-    -fx-border-width: 1px;
-    -fx-border-radius: 4px;
+    -fx-border-width: 1px;//边框宽度
+    -fx-border-radius: 4px;//边框圆角
     -fx-border-color: rgb(180,180,180);
     -fx-background-color: white;
 }
