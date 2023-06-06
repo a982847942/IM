@@ -6,6 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="itstack-navie-chat-ui-07" />
+        <module name="itstack-navie-chat-ui-06" />
         <module name="itstack-naive-chat-ui-02" />
         <module name="itstack-navie-chat-ui-04" />
       </profile>

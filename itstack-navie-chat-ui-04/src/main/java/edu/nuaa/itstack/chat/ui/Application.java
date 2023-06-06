@@ -1,5 +1,7 @@
 package edu.nuaa.itstack.chat.ui;
 
+import edu.nuaa.itstack.chat.ui.view.chat.ChatController;
+import edu.nuaa.itstack.chat.ui.view.chat.IChatMethod;
 import edu.nuaa.itstack.chat.ui.view.login.ILoginMethod;
 import edu.nuaa.itstack.chat.ui.view.login.LoginController;
 import javafx.stage.Stage;
@@ -10,14 +12,21 @@ import javafx.stage.Stage;
  * @date 2023/6/2 22:04
  */
 public class Application extends javafx.application.Application {
+//    @Override
+//    public void start(Stage primaryStage) throws Exception {
+//        ILoginMethod login = new LoginController((userId, userPassword) -> {
+//            System.out.println("登陆 userId：" + userId + "userPassword：" + userPassword);
+//        });
+//
+//        login.doShow();
+//    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-        ILoginMethod login = new LoginController((userId, userPassword) -> {
-            System.out.println("登陆 userId：" + userId + "userPassword：" + userPassword);
-        });
-
-        login.doShow();
+        IChatMethod chatMethod = new ChatController();
+        chatMethod.doShow();
     }
+
 
     public static void main(String[] args) {
         launch(args);
