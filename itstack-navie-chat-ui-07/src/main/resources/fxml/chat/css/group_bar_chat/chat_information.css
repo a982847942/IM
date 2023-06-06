@@ -165,7 +165,7 @@
     -fx-background-color: transparent, white, transparent, white;
 }
 
-.box_infoContent_left, .box_infoContent_left .content,.box_infoContent_left:focused{{
+.box_infoContent_left, .box_infoContent_left .content,.box_infoContent_left:focused{
      -fx-background-color: #ffffff;
 }
 
