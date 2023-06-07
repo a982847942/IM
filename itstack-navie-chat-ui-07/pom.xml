@@ -14,7 +14,7 @@
   </properties>
 
   <build>
-    <finalName>itstack-naive-chat-ui-02</finalName>
+    <finalName>itstack-naive-chat-ui-07</finalName>
     <plugins>
       <plugin>
         <groupId>com.zenjava</groupId>
