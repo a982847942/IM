@@ -1,6 +1,6 @@
-@import "chat_friend_group.css"
-@import "chat_friend_luck.css"
-@import "chat_friend_user.css"
+@import "chat_friend_group.css";
+@import "chat_friend_luck.css";
+@import "chat_friend_user.css";
 
 #friend{
     -fx-border-width: 0;
