@@ -9,9 +9,12 @@
         <module name="itstack-naive-chat-ui-09" />
         <module name="itstack-naive-chat-ui-08" />
         <module name="itstack-naive-chat-ui" />
+        <module name="itstack-naive-chat-client" />
+        <module name="itstack-naive-server-agreement" />
         <module name="itstack-navie-chat-ui-04" />
         <module name="itstack-navie-chat-ui-07" />
         <module name="itstack-navie-chat-ui-06" />
+        <module name="itstack-naive-chat-server-ddd" />
         <module name="itstack-naive-chat-ui-02" />
       </profile>
     </annotationProcessing>

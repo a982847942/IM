@@ -11,6 +11,9 @@
         <option value="$PROJECT_DIR$/itstack-naive-chat-ui-08/pom.xml" />
         <option value="$PROJECT_DIR$/itstack-naive-chat-ui-09/pom.xml" />
         <option value="$PROJECT_DIR$/itstack-naive-chat-ui/pom.xml" />
+        <option value="$PROJECT_DIR$/itstack-naive-chat-client/pom.xml" />
+        <option value="$PROJECT_DIR$/itstack-naive-server-agreement/pom.xml" />
+        <option value="$PROJECT_DIR$/itstack-naive-chat-server-ddd/pom.xml" />
       </list>
     </option>
   </component>
