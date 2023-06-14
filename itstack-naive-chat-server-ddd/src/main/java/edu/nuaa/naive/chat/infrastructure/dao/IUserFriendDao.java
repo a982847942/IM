@@ -12,6 +12,7 @@ import java.util.List;
  */
 @Mapper
 public interface IUserFriendDao {
+    List<String> queryUserFriendIdList(String userId);
     void addUserFriendList(List<UserFriend> userFriendList);
 
     UserFriend queryUserFriendById(UserFriend req);

@@ -15,9 +15,9 @@
         </foreach>
     </insert>
 
-<!--    <select id="queryUserFriendIdList" parameterType="java.lang.String" resultType="java.lang.String">-->
-<!--        SELECT userFriendId FROM user_friend where userId = #{userId}-->
-<!--    </select>-->
+    <select id="queryUserFriendIdList" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT userFriendId FROM user_friend where userId = #{userId}
+    </select>
 
     <select id="queryUserFriendById" parameterType="edu.nuaa.naive.chat.infrastructure.po.UserFriend" resultType="edu.nuaa.naive.chat.infrastructure.po.UserFriend">
         select userFriendId from user_friend

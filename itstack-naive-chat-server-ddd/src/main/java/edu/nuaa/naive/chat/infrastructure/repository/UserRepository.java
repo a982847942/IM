@@ -2,10 +2,8 @@ package edu.nuaa.naive.chat.infrastructure.repository;
 
 import edu.nuaa.naive.chat.domain.user.model.*;
 import edu.nuaa.naive.chat.domain.user.repository.IUserRepository;
-import edu.nuaa.naive.chat.infrastructure.dao.IUserDao;
-import edu.nuaa.naive.chat.infrastructure.dao.IUserFriendDao;
-import edu.nuaa.naive.chat.infrastructure.po.User;
-import edu.nuaa.naive.chat.infrastructure.po.UserFriend;
+import edu.nuaa.naive.chat.infrastructure.dao.*;
+import edu.nuaa.naive.chat.infrastructure.po.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +12,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static edu.nuaa.naive.chat.infrastructure.common.Constants.TalkType.Friend;
+import static edu.nuaa.naive.chat.infrastructure.common.Constants.TalkType.Group;
 
 /**
  * @author brain
@@ -27,6 +28,14 @@ public class UserRepository implements IUserRepository {
     private IUserDao userDao;
     @Autowired
     private IUserFriendDao userFriendDao;
+    @Autowired
+    private ITalkBoxDao talkBoxDao;
+    @Autowired
+    private IGroupsDao groupsDao;
+    @Autowired
+    private IUserGroupDao userGroupDao;
+    @Autowired
+    private IChatRecordDao chatRecordDao;
     @Override
     public String queryUserPassword(String userId) {
         return userDao.queryUserPassword(userId);
@@ -41,7 +50,26 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public List<TalkBoxInfo> queryTalkBoxInfoList(String userId) {
-        return null;
+        List<TalkBoxInfo> talkBoxInfoList = new ArrayList<>();
+        List<TalkBox> talkBoxList = talkBoxDao.queryTalkBoxList(userId);
+        for (TalkBox talkBox : talkBoxList) {
+            TalkBoxInfo talkBoxInfo = new TalkBoxInfo();
+            if (Friend.getCode().equals(talkBox.getTalkType())) {
+                User user = userDao.queryUserById(talkBox.getTalkId());
+                talkBoxInfo.setTalkType(Friend.getCode());
+                talkBoxInfo.setTalkId(user.getUserId());
+                talkBoxInfo.setTalkName(user.getUserNickName());
+                talkBoxInfo.setTalkHead(user.getUserHead());
+            } else if (Group.getCode().equals(talkBox.getTalkType())) {
+                Groups groups = groupsDao.queryGroupsById(talkBox.getTalkId());
+                talkBoxInfo.setTalkType(Group.getCode());
+                talkBoxInfo.setTalkId(groups.getGroupId());
+                talkBoxInfo.setTalkName(groups.getGroupName());
+                talkBoxInfo.setTalkHead(groups.getGroupHead());
+            }
+            talkBoxInfoList.add(talkBoxInfo);
+        }
+        return talkBoxInfoList;
     }
 
     @Override
@@ -51,12 +79,32 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public List<UserFriendInfo> queryUserFriendInfoList(String userId) {
-        return null;
+        List<UserFriendInfo> userFriendInfoList = new ArrayList<>();
+        List<String> friendIdList = userFriendDao.queryUserFriendIdList(userId);
+        for (String friendId : friendIdList) {
+            User user = userDao.queryUserById(friendId);
+            UserFriendInfo friendInfo = new UserFriendInfo();
+            friendInfo.setFriendId(user.getUserId());
+            friendInfo.setFriendName(user.getUserNickName());
+            friendInfo.setFriendHead(user.getUserHead());
+            userFriendInfoList.add(friendInfo);
+        }
+        return userFriendInfoList;
     }
 
     @Override
     public List<GroupsInfo> queryUserGroupInfoList(String userId) {
-        return null;
+        List<GroupsInfo> groupsInfoList = new ArrayList<>();
+        List<String> groupsIdList = userGroupDao.queryUserGroupsIdList(userId);
+        for (String groupsId : groupsIdList) {
+            Groups groups = groupsDao.queryGroupsById(groupsId);
+            GroupsInfo groupsInfo = new GroupsInfo();
+            groupsInfo.setGroupId(groups.getGroupId());
+            groupsInfo.setGroupName(groups.getGroupName());
+            groupsInfo.setGroupHead(groups.getGroupHead());
+            groupsInfoList.add(groupsInfo);
+        }
+        return groupsInfoList;
     }
 
     @Override
@@ -94,12 +142,28 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public List<ChatRecordInfo> queryChatRecordInfoList(String talkId, String userId, Integer talkType) {
-        return null;
+        List<ChatRecordInfo> chatRecordInfoList = new ArrayList<>();
+        List<ChatRecord> list = new ArrayList<>();
+        if (Friend.getCode().equals(talkType)){
+            list = chatRecordDao.queryUserChatRecordList(talkId, userId);
+        } else if (Group.getCode().equals(talkType)){
+            list =  chatRecordDao.queryGroupsChatRecordList(talkId, userId);
+        }
+        for (ChatRecord chatRecord : list) {
+            ChatRecordInfo chatRecordInfo = new ChatRecordInfo();
+            chatRecordInfo.setUserId(chatRecord.getUserId());
+            chatRecordInfo.setFriendId(chatRecord.getFriendId());
+            chatRecordInfo.setMsgContent(chatRecord.getMsgContent());
+            chatRecordInfo.setMsgType(chatRecord.getMsgType());
+            chatRecordInfo.setMsgDate(chatRecord.getMsgDate());
+            chatRecordInfoList.add(chatRecordInfo);
+        }
+        return chatRecordInfoList;
     }
 
     @Override
     public void deleteUserTalk(String userId, String talkId) {
-
+        talkBoxDao.deleteUserTalk(userId,talkId);
     }
 
     @Override
