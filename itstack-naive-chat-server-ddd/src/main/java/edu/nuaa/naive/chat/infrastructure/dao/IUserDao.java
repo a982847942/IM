@@ -2,6 +2,7 @@ package edu.nuaa.naive.chat.infrastructure.dao;
 
 import edu.nuaa.naive.chat.infrastructure.po.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public interface IUserDao {
 
     User queryUserById(String userId);
 
-//    List<User> queryFuzzyUserList(String userId, String searchKey);
+    List<User> queryFuzzyUserList(@Param("userId") String userId, @Param("searchKey") String searchKey);
 
 //    Long queryChannelUserCount(ChannelUserReq req);
 //

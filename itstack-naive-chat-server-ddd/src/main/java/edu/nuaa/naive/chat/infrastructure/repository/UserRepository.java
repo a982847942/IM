@@ -3,11 +3,16 @@ package edu.nuaa.naive.chat.infrastructure.repository;
 import edu.nuaa.naive.chat.domain.user.model.*;
 import edu.nuaa.naive.chat.domain.user.repository.IUserRepository;
 import edu.nuaa.naive.chat.infrastructure.dao.IUserDao;
+import edu.nuaa.naive.chat.infrastructure.dao.IUserFriendDao;
 import edu.nuaa.naive.chat.infrastructure.po.User;
 import edu.nuaa.naive.chat.infrastructure.po.UserFriend;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,8 +22,11 @@ import java.util.List;
  */
 @Repository("userRepository")
 public class UserRepository implements IUserRepository {
+    private final Logger logger = LoggerFactory.getLogger(UserRepository.class);
     @Autowired
     private IUserDao userDao;
+    @Autowired
+    private IUserFriendDao userFriendDao;
     @Override
     public String queryUserPassword(String userId) {
         return userDao.queryUserPassword(userId);
@@ -53,12 +61,30 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public List<LuckUserInfo> queryFuzzyUserInfoList(String userId, String searchKey) {
-        return null;
+        List<LuckUserInfo> luckUserInfoList = new ArrayList<>();
+        List<User> userList = userDao.queryFuzzyUserList(userId, searchKey);
+//        logger.info("推荐用户信息:{}",userList);
+        for (User user : userList) {
+            LuckUserInfo userInfo = new LuckUserInfo(user.getUserId(), user.getUserNickName(), user.getUserHead(), 0);
+            UserFriend req = new UserFriend();
+            req.setUserId(userId);
+            req.setUserFriendId(user.getUserId());
+            UserFriend userFriend = userFriendDao.queryUserFriendById(req);
+            if (null != userFriend) {
+                //用户好友表中已有相关friend 设置状态2
+                userInfo.setStatus(2);
+            }
+            luckUserInfoList.add(userInfo);
+        }
+        return luckUserInfoList;
     }
 
     @Override
-    public void addUserFriend(List<UserFriend> userFriendList) {
-
+    public void addUserFriendList(List<UserFriend> userFriendList) {
+        try {
+            userFriendDao.addUserFriendList(userFriendList);
+        }catch (DuplicateKeyException ignored) {
+        }
     }
 
     @Override

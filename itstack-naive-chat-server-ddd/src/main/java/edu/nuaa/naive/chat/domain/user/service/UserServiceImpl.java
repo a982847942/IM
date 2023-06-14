@@ -62,12 +62,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<LuckUserInfo> queryFuzzyUserInfoList(String userId, String searchKey) {
-        return null;
+        return userRepository.queryFuzzyUserInfoList(userId,searchKey);
     }
 
     @Override
-    public void addUserFriend(List<UserFriend> userFriendList) {
-
+    public void addUserFriendList(List<UserFriend> userFriendList) {
+        userRepository.addUserFriendList(userFriendList);
     }
 
     @Override

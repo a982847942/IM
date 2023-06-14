@@ -68,7 +68,7 @@ public interface UserService {
      * 添加好友到数据库
      * @param userFriendList 好友集合
      */
-    void addUserFriend(List<UserFriend> userFriendList);
+    void addUserFriendList(List<UserFriend> userFriendList);
     /**
      * 异步添加聊天记录
      *

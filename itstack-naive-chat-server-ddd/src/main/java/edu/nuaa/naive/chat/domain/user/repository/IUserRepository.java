@@ -69,7 +69,7 @@ public interface IUserRepository {
      *
      * @param userFriendList 好友集合
      */
-    void addUserFriend(List<UserFriend> userFriendList);
+    void addUserFriendList(List<UserFriend> userFriendList);
 
     /**
      * 添加聊天记录
