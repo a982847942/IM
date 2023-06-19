@@ -3,7 +3,7 @@
 <mapper namespace="edu.nuaa.naive.chat.infrastructure.dao.IGroupsDao">
 
     <select id="queryGroupsById" parameterType="java.lang.String" resultType="edu.nuaa.naive.chat.infrastructure.po.Groups">
-        SELECT groupId, groupName, groupHead FROM groups where groupId = #{groupId}
+        SELECT groupId, groupName, groupHead FROM groups1 where groupId = #{groupId}
     </select>
 
 </mapper>

@@ -28,9 +28,9 @@ public class MyChannelInitializer extends ChannelInitializer<NioSocketChannel> {
         channel.pipeline().addLast(new AddFriendHandler(userService));
         channel.pipeline().addLast(new DelTalkHandler(userService));
         channel.pipeline().addLast(new LoginHandler(userService));
-//        channel.pipeline().addLast(new MsgGroupHandler(userService));
-//        channel.pipeline().addLast(new MsgHandler(userService));
-//        channel.pipeline().addLast(new ReconnectHandler(userService));
+        channel.pipeline().addLast(new MsgGroupHandler(userService));
+        channel.pipeline().addLast(new MsgHandler(userService));
+        channel.pipeline().addLast(new ReconnectHandler(userService));
         channel.pipeline().addLast(new SearchFriendHandler(userService));
         channel.pipeline().addLast(new TalkNoticeHandler(userService));
         //对象传输处理[编码]

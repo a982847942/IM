@@ -14,12 +14,10 @@ import java.util.List;
 @Mapper
 public interface ITalkBoxDao {
     List<TalkBox> queryTalkBoxList(String userId);
-//
-//    void addTalkBox(TalkBox talkBox);
+    void addTalkBox(TalkBox talkBox);
 
     void deleteUserTalk(@Param("userId") String userId, @Param("talkId") String talkId);
 
-//    TalkBox queryTalkBox(String userId, String talkId);
-//
+    TalkBox queryTalkBox(@Param("userId") String userId, @Param("talkId") String talkId);
 //    List<String> queryTalkBoxGroupsIdList(String userId);
 }

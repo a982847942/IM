@@ -21,8 +21,8 @@ import java.util.concurrent.Executors;
 public class UserServiceImpl implements UserService {
     @Resource
     private IUserRepository userRepository;
-//    @Resource
-//    private ThreadPoolTaskExecutor taskExecutor;
+    @Resource
+    private ThreadPoolTaskExecutor taskExecutor;
 
     //默认线程池
     private static ExecutorService executorService = Executors.newFixedThreadPool(4);
@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addTalkBoxInfo(String userId, String talkId, Integer talkType) {
-
+        userRepository.addTalkBoxInfo(userId, talkId, talkType);
     }
 
     @Override
@@ -72,7 +72,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void asyncAppendChatRecord(ChatRecordInfo chatRecordInfo) {
-
+        taskExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                userRepository.appendChatRecord(chatRecordInfo);
+            }
+        });
     }
 
     @Override

@@ -74,7 +74,15 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public void addTalkBoxInfo(String userId, String talkId, Integer talkType) {
-
+        try {
+            if (null != talkBoxDao.queryTalkBox(userId, talkId)) return;
+            TalkBox talkBox = new TalkBox();
+            talkBox.setUserId(userId);
+            talkBox.setTalkId(talkId);
+            talkBox.setTalkType(talkType);
+            talkBoxDao.addTalkBox(talkBox);
+        } catch (DuplicateKeyException ignored) {
+        }
     }
 
     @Override
@@ -137,7 +145,14 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public void appendChatRecord(ChatRecordInfo chatRecordInfo) {
-
+        ChatRecord chatRecord = new ChatRecord();
+        chatRecord.setUserId(chatRecordInfo.getUserId());
+        chatRecord.setFriendId(chatRecordInfo.getFriendId());
+        chatRecord.setMsgContent(chatRecordInfo.getMsgContent());
+        chatRecord.setMsgType(chatRecordInfo.getMsgType());
+        chatRecord.setMsgDate(chatRecordInfo.getMsgDate());
+        chatRecord.setTalkType(chatRecordInfo.getTalkType());
+        chatRecordDao.appendChatRecord(chatRecord);
     }
 
     @Override

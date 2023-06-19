@@ -8,8 +8,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 
 import javax.annotation.Resource;
 import java.util.concurrent.Executors;
@@ -22,6 +24,7 @@ import java.util.concurrent.Future;
  */
 @SpringBootApplication
 @Configuration
+@ImportResource(locations = {"classpath:spring-config.xml"})
 public class Application extends SpringBootServletInitializer implements CommandLineRunner {
     private Logger logger = LoggerFactory.getLogger(Application.class);
 

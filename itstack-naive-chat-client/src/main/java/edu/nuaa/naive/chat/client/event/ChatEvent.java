@@ -1,5 +1,6 @@
 package edu.nuaa.naive.chat.client.event;
 
+import com.alibaba.fastjson.JSON;
 import edu.nuaa.itstack.chat.ui.view.chat.IChatEvent;
 import edu.nuaa.naive.chat.client.infrastructure.util.BeanUtil;
 import edu.nuaa.naive.chat.protocol.friend.AddFriendRequest;
@@ -35,10 +36,12 @@ public class ChatEvent implements IChatEvent {
         Channel channel = BeanUtil.getBean("channel", Channel.class);
         // 好友0
         if (0 == talkType) {
+            logger.info("发送私人消息:{}", JSON.toJSONString(msg));
             channel.writeAndFlush(new MsgRequest(userId, talkId, msg, msgType, msgDate));
         }
         // 群组1
         else if (1 == talkType) {
+            logger.info("发送群组消息:{}", JSON.toJSONString(msg));
             channel.writeAndFlush(new MsgGroupRequest(talkId, userId, msg, msgType, msgDate));
         }
     }
